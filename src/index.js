@@ -109,9 +109,9 @@ app.post('/create-payment-intent/:userId', async (req, res) => {
 
     const clientSecret = paymentIntent.client_secret;
 
+    const paymentIntentId = clientSecret.split('_secret')[0];
     
-    
-    console.log("mail runningg...")
+    console.log("mail running...")
     console.log(orderReceipts(orderDetails))
     //sent to users
     await  sendOrderMail(userEmail , orderReceipts(orderDetails));
@@ -132,7 +132,7 @@ app.post('/create-payment-intent/:userId', async (req, res) => {
     //   }
     // }
     res.status(200).send({
-      clientSecret: 'kamleshkumar86034@gmail.com',
+      clientSecret: clientSecret,
       message  : "success"
     });
   } catch (error) {
