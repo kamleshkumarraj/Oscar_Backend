@@ -236,9 +236,7 @@ app.get('/api/cards/:userId', async (req, res) => {
     // Find all cards for the given userId
     const cards = await Card.find({ userId });
 
-    if (cards.length === 0) {
-      return res.status(200).json({ message: 'No cards found for this user' , cards });
-    }
+    
 
     res.status(200).json(cards);
   } catch (error) {
