@@ -40,8 +40,13 @@ export const login = async (req, res) => {
     }
 
     const token = generateToken({ userId: user._id ,email });
-
-    res.status(200).json({ message: 'Login successful',token , data : user  });
+    const options = {
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      sameSite : 'None'
+    }
+    
+    res.status(200).cookie('token' , token, options).json({ message: 'Login successful',token , data : user  });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error });
   }

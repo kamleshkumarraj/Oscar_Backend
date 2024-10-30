@@ -15,7 +15,11 @@ const orderSchema = new mongoose.Schema({
       country: String,
     },
     paymentIntentId: String,
-    status: String, // e.g., 'paid', 'pending'
+    status: {
+      type : String,
+      enum : ['canceled' , 'failed' , 'pending' , 'success' , 'shipping'],
+      default : 'pending'
+    }, // e.g., 'paid', 'pending'
   });
 
   export default mongoose.model('Orders', orderSchema);

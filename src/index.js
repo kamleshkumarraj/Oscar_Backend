@@ -16,13 +16,17 @@ import ProductModel from './models/ProductModel.js';
 import {sendOrderMail} from "./services/emailService.js"
 import Card from './models/CardModel.js';
 import { orderReceipts } from './services/orderReceipt.js';
+import { usersRouter } from './routes/users.route.js';
+import cookieParser from 'cookie-parser'
 
 const stripe = new Stripe(process.env.STRIPE_API);
+
 
 const app = express();
 const port = 3000;
 
 connectDB(); 
+app.use(cookieParser())
 app.use(express.json({limit : '10mb'}));
 app.use(cors({
   origin : ["http://localhost:5173", "http://localhost:5174" , "https://oscar-print.vercel.app"],
@@ -30,11 +34,13 @@ app.use(cors({
   credentials : true
 }));
 app.use('/auth', authRoutes);
+app.use('/api', usersRouter)
 // app.use('/product',)
 
 // Configure multer for file uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+
 
 
 
@@ -73,32 +79,32 @@ app.post('/create-payment-intent', async (req, res) => {
     const { items, customer, totalAmount  } = req.body;
 
    
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalAmount * 100, // Stripe expects amount in cents
-      currency: 'inr',
-      description: 'Order description here',
-    });
+    // const paymentIntent = await stripe.paymentIntents.create({
+    //   amount: totalAmount * 100, // Stripe expects amount in cents
+    //   currency: 'inr',
+    //   description: 'Order description here',
+    // });
     console.log("Running payment intent...")
     // Save order in MongoDB
     const order = new Order({
       items,
       totalAmount,
       customer,
-      paymentIntentId: paymentIntent.id,
+      // paymentIntentId: paymentIntent.id,
       status: 'pending',
     });
     const orderDetails = new Order({
       items,
       totalAmount,
       customer,
-      paymentIntentId: paymentIntent.id
+      // paymentIntentId: paymentIntent.id
     })
 
     await order.save();
 
    
 
-    const clientSecret = paymentIntent.client_secret;
+    // const clientSecret = paymentIntent.client_secret;
 
     
     
@@ -123,7 +129,8 @@ app.post('/create-payment-intent', async (req, res) => {
     //   }
     // }
     res.status(200).send({
-      clientSecret: paymentIntent.client_secret,
+      clientSecret: 'kamleshkumar86034@gmail.com',
+      message  : "success"
     });
   } catch (error) {
     res.status(500).send({
