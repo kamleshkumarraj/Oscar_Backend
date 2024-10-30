@@ -1,7 +1,7 @@
 import Order from '../models/payment.js'
 export const getAllOrdersByStatus = async (req , res , next) => {
     try{
-        const orders = await Order.find({status : req.params.status})
+        const orders = await Order.find({user : req.params.userId})
 
         if(!orders){
            res.status(404).json({

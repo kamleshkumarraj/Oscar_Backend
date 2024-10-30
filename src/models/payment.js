@@ -3,6 +3,11 @@ import mongoose from 'mongoose';
 const orderSchema = new mongoose.Schema({
     items: Array,
     totalAmount: Number,
+    user : {
+      type : mongoose.Schema.ObjectId,
+      ref : 'Oscar-printing-users',
+      required : true
+    },
     customer: {
       firstName: String,
       lastName: String,

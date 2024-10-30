@@ -1,7 +1,7 @@
 
 import jwt from 'jsonwebtoken';
 
-const isLoggedIn = asyncHandler(async (req , res , next) =>{
+const isLoggedIn = async (req , res , next) =>{
     let {token} = req.cookies;
     token ? token : req.query.token;
     if(!token){
@@ -20,6 +20,6 @@ const isLoggedIn = asyncHandler(async (req , res , next) =>{
      }
 
     
-})
+    }
 
 export default isLoggedIn

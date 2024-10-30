@@ -72,39 +72,42 @@ app.post('/upload', upload.single('image'), async (req, res) => {
   }
 });
 
-app.post('/create-payment-intent', async (req, res) => {
+app.post('/create-payment-intent/:userId', async (req, res) => {
   try {
     let userEmail = "kamlesh.22jics061@jietjodhpur.ac.in";
     let adminEmail = "contact@xendekweb.com";
     const { items, customer, totalAmount  } = req.body;
+    const userId = req.params.userId
+    if(!userId) res.status(403).json({success : false , message : "Please send userId !"})
 
    
-    // const paymentIntent = await stripe.paymentIntents.create({
-    //   amount: totalAmount * 100, // Stripe expects amount in cents
-    //   currency: 'inr',
-    //   description: 'Order description here',
-    // });
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: totalAmount * 100, // Stripe expects amount in cents
+      currency: 'inr',
+      description: 'Order description here',
+    });
     console.log("Running payment intent...")
     // Save order in MongoDB
     const order = new Order({
       items,
       totalAmount,
       customer,
-      // paymentIntentId: paymentIntent.id,
+      paymentIntentId: paymentIntent.id,
       status: 'pending',
+      user : userId
     });
     const orderDetails = new Order({
       items,
       totalAmount,
       customer,
-      // paymentIntentId: paymentIntent.id
+      paymentIntentId: paymentIntent.id
     })
 
     await order.save();
 
    
 
-    // const clientSecret = paymentIntent.client_secret;
+    const clientSecret = paymentIntent.client_secret;
 
     
     
