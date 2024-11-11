@@ -18,6 +18,7 @@ import Card from './models/CardModel.js';
 import { orderReceipts } from './services/orderReceipt.js';
 import { usersRouter } from './routes/users.route.js';
 import cookieParser from 'cookie-parser'
+import { adminHandlerRoute } from './routes/adminRoutes.routes.js';
 
 const stripe = new Stripe(process.env.STRIPE_API);
 
@@ -34,7 +35,8 @@ app.use(cors({
   credentials : true
 }));
 app.use('/auth', authRoutes);
-app.use('/api', usersRouter)
+app.use('/api', usersRouter);
+app.use('/api/admin', adminHandlerRoute)
 // app.use('/product',)
 
 // Configure multer for file uploads
