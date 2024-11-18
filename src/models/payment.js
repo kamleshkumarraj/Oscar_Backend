@@ -25,6 +25,6 @@ const orderSchema = new mongoose.Schema({
       enum : ['canceled' , 'failed' , 'pending' , 'success' , 'shipping'],
       default : 'pending'
     }, // e.g., 'paid', 'pending'
-  });
+  }, {timestamps : true});
 
   export default mongoose.model('Orders', orderSchema);
