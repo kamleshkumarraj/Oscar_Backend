@@ -35,7 +35,7 @@ export const orderReceipts = (orderDetails) => {
           2
         )}</td>
         <td style="padding: 8px; border: 1px solid #ddd;">$${(
-          item.quantity * item.price
+          item.price
         ).toFixed(2)}</td>
       </tr>
       <tr>
