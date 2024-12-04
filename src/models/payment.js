@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema({
     paymentIntentId: String,
     status: {
       type : String,
-      enum : ['canceled' , 'failed' , 'pending' , 'success' , 'shipping'],
+      enum : ['cancelled' , 'active' , 'pending' , 'delivered' ],
       default : 'pending'
     }, // e.g., 'paid', 'pending'
   }, {timestamps : true});
