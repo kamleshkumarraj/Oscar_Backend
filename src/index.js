@@ -207,7 +207,7 @@ app.get('/get-products', async (req, res) => {
 // creator 
 
 app.post('/api/card', async (req, res) => {
-  const { HTMLCard, JSONCard, userId , image , price , quantity  , cartDetails} = req.body;
+  const { HTMLCard, JSONCard, userId , image , price , quantity  , cartDetails , title} = req.body;
 
   // Validate the required fields
   if ( !userId) {
@@ -222,7 +222,8 @@ app.post('/api/card', async (req, res) => {
       image,
       price,
       quantity,
-      cartDetails
+      cartDetails,
+      title
     });
     await newCard.save();
 
