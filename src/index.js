@@ -118,7 +118,7 @@ app.post('/create-payment-intent/:userId', async (req, res) => {
     console.log("mail running...")
     console.log(orderReceipts(orderDetails))
     //sent to users
-    await  sendOrderMail(userEmail , orderReceipts(orderDetails));
+    await  sendOrderMail(userEmail , orderReceipts(orderDetails , userEmail));
     
     //sent to admin
     

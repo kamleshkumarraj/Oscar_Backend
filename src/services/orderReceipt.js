@@ -1,4 +1,4 @@
-export const orderReceipts = (orderDetails) => {
+export const orderReceipts = (orderDetails , email) => {
     
   const htmlContent =  `<div style="font-family: Arial, sans-serif; color: #333; background-color: #f5f5f5; padding: 20px; border-radius: 5px;">
     <h2 style="color: #4CAF50;">Order Receipt</h2>
@@ -9,7 +9,7 @@ export const orderReceipts = (orderDetails) => {
     <p>Name: ${orderDetails.customer.firstName} ${
     orderDetails.customer.lastName
   }</p>
-    <p>Email: ${orderDetails.customer.email}</p>
+    <p>Email: ${email}</p>
     <p>Phone: ${orderDetails.customer.phone}</p>
     <p>Address: ${orderDetails.customer.address}, ${
     orderDetails.customer.city
@@ -40,7 +40,7 @@ export const orderReceipts = (orderDetails) => {
       </tr>
       <tr>
         <td colspan="4" style="padding: 8px; border: 1px solid #ddd;">
-          <strong>Paper Details for ${'Standard Visiting Card.'}:</strong><br>
+          <strong>Paper Details for ${item.title}:</strong><br>
           ${Object.entries(item.cartDetails)
             .map(
               ([key, value]) =>
