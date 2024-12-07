@@ -78,7 +78,7 @@ app.post('/create-payment-intent/:userId', async (req, res) => {
   try {
     let userEmail = "kamlesh.22jics061@jietjodhpur.ac.in";
     let adminEmail = "contact@xendekweb.com";
-    const { items, customer, totalAmount  } = req.body;
+    const { items, customer, totalAmount , title  } = req.body;
     const userId = req.params.userId
     if(!userId) res.status(403).json({success : false , message : "Please send userId !"})
 
@@ -92,6 +92,7 @@ app.post('/create-payment-intent/:userId', async (req, res) => {
     // Save order in MongoDB
     const order = new Order({
       items,
+      title,
       totalAmount,
       customer,
       paymentIntentId: paymentIntent.id,
@@ -100,6 +101,7 @@ app.post('/create-payment-intent/:userId', async (req, res) => {
     });
     const orderDetails = new Order({
       items,
+      title,
       totalAmount,
       customer,
       paymentIntentId: paymentIntent.id

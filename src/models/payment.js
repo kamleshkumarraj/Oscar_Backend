@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const orderSchema = new mongoose.Schema({
     items: Array,
     totalAmount: Number,
+    title : String,
     user : {
       type : mongoose.Schema.ObjectId,
       ref : 'Oscar-printing-users',
@@ -22,7 +23,7 @@ const orderSchema = new mongoose.Schema({
     paymentIntentId: String,
     status: {
       type : String,
-      enum : ['cancelled' , 'active' , 'pending' , 'delivered' ],
+      enum : ["Pending", "Confirmed" , "Shipped", "Out For Delivery" , "Delivered" , 'Cancelled' ],
       default : 'pending'
     }, // e.g., 'paid', 'pending'
   }, {timestamps : true});
