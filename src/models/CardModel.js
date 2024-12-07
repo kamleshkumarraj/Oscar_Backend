@@ -8,7 +8,8 @@ const CardSchema = new mongoose.Schema({
     price : {type : Number , required : true },
     quantity : {type : Number , required : true },
     createdAt: { type: Date, default: Date.now },
-    cartDetails : {type : Object , required : true}
+    cartDetails : {type : Object , required : true},
+    title : {type : String , required : true}
 
 });
 
