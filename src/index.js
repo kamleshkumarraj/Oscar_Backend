@@ -96,7 +96,7 @@ app.post('/create-payment-intent/:userId', async (req, res) => {
       totalAmount,
       customer,
       paymentIntentId: paymentIntent.id,
-      status: 'pending',
+      status: 'Pending',
       user : userId
     });
     const orderDetails = new Order({
